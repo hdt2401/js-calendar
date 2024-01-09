@@ -1,9 +1,11 @@
-module.exports = app => {
-  const home = require('../controllers/home.js');
-  var router = require('express').Router();
-  
-  router.get('/', home.homePage);
-  // router.get('/redirect', home.homePageRedirect);
-  
-  app.use('/home', router);
+import auth from './auth.route';
+
+const initRoutes = app => {
+  app.use('/api/v1/auth', auth);
+
+  return app.use('/', (req, res) => {
+    return res.send('Server on')
+  })
 }
+
+module.exports = initRoutes;
