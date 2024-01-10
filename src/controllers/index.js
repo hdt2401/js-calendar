@@ -1,2 +1,2 @@
 export * from './auth.controller';
-export * from './home';
+export * from './user.controller';

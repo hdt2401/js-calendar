@@ -1,5 +1,3 @@
-// const express = require('express');
-// const cors = require('cors');
 import express from 'express';
 import cors from 'cors';
 import initRoutes from './src/routes';
@@ -23,10 +21,9 @@ app.use(express.urlencoded({ extended: true }));
 // require('./src/routes/index.js')(app);
 initRoutes(app);
 
-
-app.use('/', (req, res) => {
-  return res.send('hello world!');
-});
+// app.use('/', (req, res) => {
+//   return res.send('hello world!');
+// });
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8888;
