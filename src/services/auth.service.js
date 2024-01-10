@@ -1,12 +1,22 @@
  import db from '../models';
+import bcrypt from 'bcryptjs';
 
-export const register = async () => new Promise((resolve, reject) => {
+const hashPassword = password => bcrypt.hashSync(password, bcrypt.genSaltSync(8));
+
+export const register = async ({ email, password }) => new Promise(async (resolve, reject) => {
   try {
-    resolve({
-      error: 0,
-      message: 'register service',
+    const response = await db.User.findOrCreate({
+      where: { email },
+      defaults: {
+        email,
+        password: hashPassword(password),
+      }
     });
-    // console.log('after resolve');
+    console.log(response)
+    resolve({
+      err: response[1] ? 0 : 1,
+      mes: response[1] ? 'Register is successfully' : 'Email is used'
+    })
   } catch (error) {
     reject(error);
   }
